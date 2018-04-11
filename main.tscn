@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+var script = preload(\"res://fov_tilemap.gd\").new() #Import the script
+onready var Map = get_node(\"Map\") #Grab the map node once
+
+func _ready():
+	#Spawn random tiles for 1000x100 cells.
+	var x = 0
+	var y = 0
+	while x < 1000:
+		while y < 100:
+			Map.set_cell(x,y,randi()%13)
+			y += 1
+		y = 0
+		x += 1
+	
+	script.load_map(Map) #Load the map into the script
+
+var FPS = [] #Array for FPS measurements
+onready var Camera = get_node(\"Camera\") #Get camera node once
+
+func _process(delta):
+	if Input.is_key_pressed(KEY_ESCAPE):
+		var avg = 0
+		for fps in FPS:
+			avg += fps
+		avg = avg / FPS.size()
+		print(\"Average FPS: \",avg)
+		get_tree().quit()
+	
+	FPS.append(Performance.get_monitor(Performance.TIME_FPS)) #Log FPS each frame
+	script.draw_map(Map, Camera, 2) #Update the tilemap every frame and set a margin of 2
+"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "extends Camera2D
+
+var addsub = Vector2(0.05,0.05) #Interval for zooming
+
+func _unhandled_input(event): #Take care of camera zooming
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_WHEEL_DOWN:
+			if zoom < Vector2(1.45,1.45): #Max zoom: 1.5
+				zoom += addsub
+				position = get_camera_screen_center()
+		
+		elif event.button_index == BUTTON_WHEEL_UP:
+			if zoom > Vector2(0.5,0.5): #Max zoom: 0.5
+				zoom -= addsub
+				position = get_camera_screen_center()
+			
+		get_tree().set_input_as_handled()
+
+func _process(delta): #Take care of camera movement
+	var pixelspeed = 400 #Speed of the camera in pixel/frame
+
+	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
+		if get_position().y >= get_camera_position().y:
+			position.y -= pixelspeed * delta
+			get_tree().set_input_as_handled()
+			
+	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
+		if get_position().y <= get_camera_position().y:
+			position.y += pixelspeed * delta
+			get_tree().set_input_as_handled()
+			
+	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
+		if get_position().x <= get_camera_position().x:
+			position.x += pixelspeed * delta
+			get_tree().set_input_as_handled()
+			
+	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
+		if get_position().x >= get_camera_position().x:
+			position.x -= pixelspeed * delta
+			get_tree().set_input_as_handled()
+"
+
+[node name="Main" type="Node2D" index="0"]
+
+script = SubResource( 1 )
+
+[node name="Map" type="TileMap" parent="." index="0"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 20, 20 )
+cell_quadrant_size = 128
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 131074, 11, 0, 131077, 11, 0, 131079, 11, 0, 131082, 11, 0, 196610, 11, 0, 196613, 11, 0, 196615, 11, 0, 196618, 11, 0, 262146, 11, 0, 262147, 11, 0, 262148, 11, 0, 262149, 11, 0, 262151, 11, 0, 262154, 11, 0, 327682, 11, 0, 327685, 11, 0, 327687, 11, 0, 393218, 11, 0, 393221, 11, 0, 393223, 11, 0, 393226, 11, 0 )
+
+[node name="Camera" type="Camera2D" parent="." index="1"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+smoothing_enabled = true
+smoothing_speed = 15.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+script = SubResource( 2 )
+
+
