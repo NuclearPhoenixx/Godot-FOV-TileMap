@@ -28,7 +28,7 @@ Dictionary map = {
 }
 ```
 
-The only file you will need to get started is this one: [fov-tilemap.gd](fov-tilemap.gd)
+The only file you will need to get started is this one: [fov_tilemap.gd](fov_tilemap.gd)
 
 ---
 
