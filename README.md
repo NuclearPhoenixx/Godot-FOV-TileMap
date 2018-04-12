@@ -73,7 +73,21 @@ Conveniently, this repository is also a Godot testing project. By downloading th
 
 ## Media
 
-Working on it!
+This is what it looks like if you set `CellMargin` to `1`:
+
+![1 Margin](https://phoenix1747.github.io/host/margin1.png)
+
+No real difference, right? :)
+
+This is what it looks like if you do not set any `CellMargin` (aka `0`):
+
+![0 Margin](https://phoenix1747.github.io/host/margin0.png)
+
+Note that this screenshot has been taken while moving, when the camera doesn't move you don't see any difference as well.
+
+And finally, this is what it looks like if you use a negative (e.g. `-3`) `CellMargin`:
+
+![-3 Margin](https://phoenix1747.github.io/host/margin-3.png)
 
 ---
 
