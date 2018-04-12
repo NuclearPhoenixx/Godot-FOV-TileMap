@@ -1,18 +1,23 @@
 # Godot-FOV-Tilemaps
 
-**This is work in progress!**
+**This is still work in progress!**
 
 Simple script for Godot 3.0+ that shows any tilemap like normal but clears all cells outside of the Camera2D's FOV.
 
-It works by only setting cells of the map that are visible to the Camera2D node that you handed over to the functions.
+It works by only setting cells of the map that are visible to the Camera2D node that you handed over to the functions. It's a side-project of mine and just a nice little experiment. Note that Godot itself takes care of the tile map rendering, but with much better performance (see "clipping"; also this script is "only" GDScript).
 
-This allows you to load huge, expensive tilemaps without much performance impact, depending on the Camera FOV/Viewport of course.
-You could also use it together with your procedural map generator.
+This allows you to work, for example, together with a procedural map generator. You can add your generated cells to the map dictionary and activate the garbage collection, so that you only have to generate around the camera fov, but with a buffer of an arbitrary number of cells. There are functions to add, remove and update any cell, garbage collecting cells and getting some stats like the start/end point.
 
-If you want to generate infinite maps for example, you can work with the map dictionary that this script generates.
-This allows you to change the tile id for any loaded map cell or even garbage collecting old parts of the map.
+You could also use this to have a very crude visual range effect if you set the `CellMargin` to a negative value, which makes the visible map smaller than the Camera FOV. More below at "Media".
 
-The dictionary is conscructed like so:
+Note that this script has, of course, a clear performance loss, which also depends greatly on the Camera zoom, the Viewport size and the cell quadrant size; more info about this below at "Comparison".
+So if you want to use this in your production game, check this list first:
+
+1. Seriously consider if this is a good idea.
+2. If yes, re-write this in GDNative, this will make it much faster.
+3. Dismiss the idea anyways.
+
+The map dictionary is constructed like so:
 
 ```python
 Dictionary map = {
@@ -23,7 +28,7 @@ Dictionary map = {
 }
 ```
 
-The only file you will need is this one: [fov-tilemap.gd](fov-tilemap.gd)
+The only file you will need to get started is this one: [fov-tilemap.gd](fov-tilemap.gd)
 
 ---
 
@@ -36,12 +41,25 @@ load_map(MapNode)
 ```
 ... where `MapNode` is your Tilemap Node.
 
-Then you can call the following whenever you want to update the map (preferably whenever the Camera2D has moved).
+Then you can call the following whenever you want to update the map (preferably whenever the Camera2D has moved or in `_process`).
 
 ```python
 draw_map(MapNode, CameraNode, CellMargin=0)
 ```
-...where `MapNode` is you Tilemap Node, `CameraNode` is you Camera2D Node and `CellMargin` is the margin of cells around your FOV (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
+...where `MapNode` is your Tilemap Node, `CameraNode` is you Camera2D Node and `CellMargin` is the margin of cells around your FOV (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
+
+You can also get the start and ending points of your map using these two functions:
+
+```python
+get_start_point()
+get_end_point()
+```
+... which both return a Vector2 with the coordinates. However, if you already loaded the map, you can simply grab the vars that the map loader has created.
+
+```python
+var start_point
+var end_point
+```
 
 **More functions to come!**
 
@@ -49,21 +67,32 @@ draw_map(MapNode, CameraNode, CellMargin=0)
 
 ## Example
 
-This repository is conveniently a Godot testing project. By downloading this repo and importing it in Godot 3.0+, you can instantly see and learn how this would be used and how the script works.
+Conveniently, this repository is also a Godot testing project. By downloading this repo and importing it in Godot 3.0+ you can instantly see and learn how this would be used and how the script works.
+
+---
+
+## Media
+
+Working on it!
 
 ---
 
 ## Comparison
 
-This are my first simple performance test results with the same environment each.
+These are my first simple performance test results all tested on the same medium-weak Linux laptop with dedicated graphics.
 
-**Environment: Tilemap 1000x100 cells, 13 different tiles (20x20), Quadrant Size 128, Camera Scrolling Speed 200px/frame, standard window size.**
+**Environment: Tilemap 100x100 cells, 13 different tiles (20x20), Camera Scrolling Speed 200px/frame, script in _process, else standard settings.**
 
-**System: Medium-low spec laptop with dedicated graphics and Linux.**
+**You can test it yourself, see "Example".**
 
-|Camera Zoom: | 1.5 |	1.0 | 0.5 | Max RAM usage |
-| --- | --- | --- | --- | --- |
-|FPS normal: | 60 | 66 | 69 | 45.8 MB |
-|FPS with this script: | 65	| 210 | 293	| 55.96 MB |
+|Camera Zoom: | 0.5 |	1.0 | 1.5 | 2.0 | Max RAM usage |
+| --- | --- | --- | --- | --- | --- |
+|FPS normal: | 220 | 226 | 179 | 149 | 31.59 MB |
+|FPS with this script: | 243 | 195 | 123 | 85 | 32.61 MB |
 
-_Note that because of how this script works at the moment, it might actually look like the game stutters more than usually. This however depends greatly on your Viewport size and system specs._
+**Same Env as above, but this time with a Tilemap size 1000x1000:**
+
+|Camera Zoom: | 0.5 |	1.0 | 1.5 | 2.0 | Max RAM usage |
+| --- | --- | --- | --- | --- | --- |
+|FPS normal: | 230 | 218 | 150 | 111 | 190.65 MB |
+|FPS with this script: | 250 | 191 | 101 | 62 | 322.71 MB |

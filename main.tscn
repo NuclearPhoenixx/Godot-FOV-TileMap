@@ -35,7 +35,7 @@ func _process(delta):
 		get_tree().quit()
 	
 	FPS.append(Performance.get_monitor(Performance.TIME_FPS)) #Log FPS each frame
-	script.draw_map(Map, Camera, 2) #Update the tilemap every frame and set a margin of 2
+	script.draw_map(Map, Camera, 1) #Update the tilemap every frame and set a margin of 1
 "
 
 [sub_resource type="GDScript" id=2]
@@ -59,7 +59,7 @@ func _unhandled_input(event): #Take care of camera zooming
 		get_tree().set_input_as_handled()
 
 func _process(delta): #Take care of camera movement
-	var pixelspeed = 400 #Speed of the camera in pixel/frame
+	var pixelspeed = 200 #Speed of the camera in pixel/frame
 
 	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		if get_position().y >= get_camera_position().y:
@@ -91,7 +91,7 @@ script = SubResource( 1 )
 mode = 0
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 20, 20 )
-cell_quadrant_size = 128
+cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 cell_half_offset = 2
 cell_tile_origin = 0

@@ -14,10 +14,6 @@ config/name="FOV Tilemaps"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/vsync/use_vsync=false
