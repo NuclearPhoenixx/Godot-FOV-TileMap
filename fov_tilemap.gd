@@ -4,7 +4,6 @@ extends Node2D
 # https://github.com/Phoenix1747/Godot-FOV-Tilemaps
 #
 var map = {} #This dictionary will hold the complete map after loading.
-
 var start_point #This is the very first point in the map dictionary.
 var end_point #This is the very last point in the map dictionary.
 
@@ -87,30 +86,51 @@ func garbage_collect(MapNode, CellMargin=100):
 
 #This function retrieves the starting point of the map.
 func get_start_point():
-	var min_x
-	var min_y
+	var x_values = get_x_cell_values()
+	var y_values = get_y_cell_values()
 	
-	for x in map.keys():
-		for y in map[x].keys():
-			min_y = y
-			break #Save the very first Y value and break.
-		min_x = x
-		break #Save the very first X value and break.
+	for x in x_values:
+		
+	
+	var min_x = x_values.sort()[0] #Sort the arrays, then grab the first value which is the smallest.
+	var min_y = y_values.sort()[0]
 	
 	return Vector2(min_x, min_y)
 
 #This function retrieves the ending point of the map.
 func get_end_point():
-	var max_x
-	var max_y
+	var x_values = get_x_cell_values()
+	var y_values = get_y_cell_values()
 	
-	for x in map.keys():
-		max_x = x #Save the very last X value.
-	
-	for y in map[max_x].keys():
-		max_y = y #Save the very last Y value for the max_x value.
+	var max_x = x_values.sort().invert()[0] #Sort the arrays, then invert them to get the biggest values first.
+	var max_y = y_values.sort().invert()[0]
 	
 	return Vector2(max_x, max_y)
+
+#This function gets all the X values for each cell from the tilemap.
+func get_x_cell_values():
+	var x_values = [] #New array that holds all the values.
+	
+	for x in map.keys():
+		x_values.append(int(x)) #Append all the X values to the array.
+	
+	return x_values #Return the x_values array
+
+#This function gets all the Y values for each cell from the tilemap.
+func get_y_cell_values():
+	var x_values = [] #New array that holds all the X values.
+	
+	for x in map.keys():
+		x_values.append(x) #Append all the X values to the array.
+	
+	var y_values = [] #New array that holds all the values.
+	
+	for x in x_values:
+		for y in map[x].keys():
+			y_values.append(int(y)) #Append all the Y values to the array.
+			print(int(y))
+	
+	return y_values #Return the y_values array
 
 #This function re-builds the whole tilemap from the map dict.
 func rebuild_map(MapNode):
