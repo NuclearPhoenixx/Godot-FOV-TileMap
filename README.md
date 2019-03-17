@@ -101,12 +101,12 @@ These are my first simple performance test results all tested on the same medium
 
 |Camera Zoom: | 0.5 |	1.0 | 1.5 | 2.0 | Max RAM usage |
 | --- | --- | --- | --- | --- | --- |
-|FPS normal: | 220 | 226 | 179 | 149 | 31.59 MB |
-|FPS with this script: | 243 | 195 | 123 | 85 | 32.61 MB |
+|FPS normal: | 182 | 172 | 153 | 145 | 35 MB |
+|FPS with this script: | 194 | 172 | 124 | 86 | 36 MB |
 
 **Same Env as above, but this time with a Tilemap size 1000x1000:**
 
 |Camera Zoom: | 0.5 |	1.0 | 1.5 | 2.0 | Max RAM usage |
 | --- | --- | --- | --- | --- | --- |
-|FPS normal: | 230 | 218 | 150 | 111 | 190.65 MB |
-|FPS with this script: | 250 | 191 | 101 | 62 | 322.71 MB |
+|FPS normal: | 181 | 177 | 159 | 137 | 326 MB |
+|FPS with this script: | 204 | 173 | 124 | 85 | 358 MB |
