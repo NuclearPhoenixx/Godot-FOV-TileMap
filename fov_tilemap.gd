@@ -16,8 +16,11 @@ func load_map(MapNode): #This function generates the "map" dict for the tilemap 
 	for cell in used_cells: #Copy all the tile values into the dict.
 		map[cell.x][cell.y] = MapNode.get_cellv(cell)
 	
-	start_point = get_start_point()
-	end_point = get_end_point()
+	get_x_cell_values() #Grab all the x and y coords of the tilemaps cells.
+	get_y_cell_values()
+	
+	start_point = Vector2(x_cell_values.min(), y_cell_values.min()) #Compute start and end point of the tilemap.
+	end_point = Vector2(x_cell_values.max(), y_cell_values.max())
 
 var previous_camera_position #This var holds the previous camera position for "draw_map".
 var previous_camera_zoom #This var holds the previous camera zoom for "draw_map".
@@ -84,37 +87,16 @@ func garbage_collect(MapNode, CellMargin=100):
 	#DO SOMETHING AND DONT FORGET TO UPDATE START AND END POINT!
 	pass
 
-#This function retrieves the starting point of the map.
-func get_start_point():
-	var x_values = get_x_cell_values()
-	var y_values = get_y_cell_values()
-	
-	for x in x_values:
-		
-	
-	var min_x = x_values.sort()[0] #Sort the arrays, then grab the first value which is the smallest.
-	var min_y = y_values.sort()[0]
-	
-	return Vector2(min_x, min_y)
-
-#This function retrieves the ending point of the map.
-func get_end_point():
-	var x_values = get_x_cell_values()
-	var y_values = get_y_cell_values()
-	
-	var max_x = x_values.sort().invert()[0] #Sort the arrays, then invert them to get the biggest values first.
-	var max_y = y_values.sort().invert()[0]
-	
-	return Vector2(max_x, max_y)
+var x_cell_values = []
 
 #This function gets all the X values for each cell from the tilemap.
 func get_x_cell_values():
-	var x_values = [] #New array that holds all the values.
-	
 	for x in map.keys():
-		x_values.append(int(x)) #Append all the X values to the array.
+		x_cell_values.append(int(x)) #Append all the X values to the array.
 	
-	return x_values #Return the x_values array
+	return
+
+var y_cell_values = []
 
 #This function gets all the Y values for each cell from the tilemap.
 func get_y_cell_values():
@@ -123,14 +105,11 @@ func get_y_cell_values():
 	for x in map.keys():
 		x_values.append(x) #Append all the X values to the array.
 	
-	var y_values = [] #New array that holds all the values.
-	
 	for x in x_values:
 		for y in map[x].keys():
-			y_values.append(int(y)) #Append all the Y values to the array.
-			print(int(y))
+			y_cell_values.append(int(y)) #Append all the Y values to the array.
 	
-	return y_values #Return the y_values array
+	return
 
 #This function re-builds the whole tilemap from the map dict.
 func rebuild_map(MapNode):

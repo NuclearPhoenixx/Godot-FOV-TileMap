@@ -3,7 +3,6 @@
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "extends Node2D
 
 var script = preload(\"res://fov_tilemap.gd\").new() #Import the script
@@ -39,7 +38,6 @@ func _process(delta):
 "
 
 [sub_resource type="GDScript" id=2]
-
 script/source = "extends Camera2D
 
 var addsub = Vector2(0.05,0.05) #Interval for zooming
@@ -59,7 +57,7 @@ func _unhandled_input(event): #Take care of camera zooming
 		get_tree().set_input_as_handled()
 
 func _process(delta): #Take care of camera movement
-	var pixelspeed = 200 #Speed of the camera in pixel/frame
+	var pixelspeed = 300 #Speed of the camera in pixel/frame
 
 	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		if get_position().y >= get_camera_position().y:
@@ -82,54 +80,21 @@ func _process(delta): #Take care of camera movement
 			get_tree().set_input_as_handled()
 "
 
-[node name="Main" type="Node2D" index="0"]
-
+[node name="Main" type="Node2D"]
 script = SubResource( 1 )
 
-[node name="Map" type="TileMap" parent="." index="0"]
-
-mode = 0
+[node name="Map" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 20, 20 )
-cell_quadrant_size = 16
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-cell_half_offset = 2
-cell_tile_origin = 0
-cell_y_sort = false
-cell_clip_uv = false
-collision_use_kinematic = false
-collision_friction = 1.0
-collision_bounce = 0.0
-collision_layer = 1
-collision_mask = 1
-occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 131074, 11, 0, 131077, 11, 0, 131079, 11, 0, 131082, 11, 0, 196610, 11, 0, 196613, 11, 0, 196615, 11, 0, 196618, 11, 0, 262146, 11, 0, 262147, 11, 0, 262148, 11, 0, 262149, 11, 0, 262151, 11, 0, 262154, 11, 0, 327682, 11, 0, 327685, 11, 0, 327687, 11, 0, 393218, 11, 0, 393221, 11, 0, 393223, 11, 0, 393226, 11, 0 )
 
-[node name="Camera" type="Camera2D" parent="." index="1"]
-
-anchor_mode = 1
-rotating = false
+[node name="Camera" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
 limit_smoothed = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 smoothing_enabled = true
 smoothing_speed = 15.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 script = SubResource( 2 )
-
 

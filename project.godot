@@ -17,8 +17,12 @@ _global_script_class_icons={
 
 config/name="FOV Tilemaps"
 run/main_scene="res://main.tscn"
-config/icon="res://icon.png"
 
-[display]
+[debug]
 
-window/vsync/use_vsync=false
+gdscript/warnings/unused_argument=false
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0

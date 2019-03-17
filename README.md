@@ -46,7 +46,7 @@ Then you can call the following whenever you want to update the map (preferably 
 ```python
 draw_map(MapNode, CameraNode, CellMargin=0)
 ```
-...where `MapNode` is your Tilemap Node, `CameraNode` is you Camera2D Node and `CellMargin` is the margin of cells around your FOV (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
+...where `MapNode` is your Tilemap Node, `CameraNode` is your moving Camera2D Node and `CellMargin` is the margin of cells around your FOV (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
 
 You can also get the start and ending points of your map using these two functions:
 
