@@ -1,7 +1,5 @@
 # Godot-FOV-Tilemaps
 
-**This is still work in progress!**
-
 Simple script for Godot 3.0+ that shows any tilemap like normal but clears all cells outside of the Camera2D's FOV.
 
 It works by only setting cells of the map that are visible to the Camera2D node that you handed over to the functions. It's a side-project of mine and just a nice little experiment. Note that Godot itself takes care of the tile map rendering, but with much better performance (see "clipping"; also this script is "only" GDScript).
