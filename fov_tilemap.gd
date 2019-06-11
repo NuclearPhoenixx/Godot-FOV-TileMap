@@ -63,28 +63,10 @@ func draw_map(MapNode, CameraNode, CellMargin=0):
 	previous_camera_position = CameraNode.position #Update all the previous Camera vars.
 	previous_camera_zoom = CameraNode.zoom
 
-#This function adds a single cell to the tilemap.
-func add_cell(MapNode, PositionVector, TileID):
-	#WORK IN PROGRESS
-	#DO SOMETHING AND DONT FORGET TO UPDATE START AND END POINT!
-	pass
-
-#This function removes a single cell from the tilemap.
-func delete_cell(MapNode, PositionVector):
-	#WORK IN PROGRESS
-	#DO SOMETHING AND DONT FORGET TO UPDATE START AND END POINT!
-	pass
-
 #This function updates a single cell's tile.
 func update_cell(MapNode, PositionVector, TileID):
 	map[PositionVector.x][PositionVector.y] = TileID
 	MapNode.set_cellv(PositionVector, TileID)
-
-#This function removes any cells after a specific margin from the map.
-func garbage_collect(MapNode, CellMargin=100):
-	#WORK IN PROGRESS
-	#DO SOMETHING AND DONT FORGET TO UPDATE START AND END POINT!
-	pass
 
 var x_cell_values = []
 
@@ -112,4 +94,6 @@ func get_y_cell_values():
 
 #This function re-builds the whole tilemap from the map dict.
 func rebuild_map(MapNode):
-	pass
+	for x in map:
+		for y in map[x]:
+			MapNode.set_cell(x, y, map[x][y])
