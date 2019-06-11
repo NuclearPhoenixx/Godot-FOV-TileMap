@@ -77,9 +77,8 @@ func delete_cell(MapNode, PositionVector):
 
 #This function updates a single cell's tile.
 func update_cell(MapNode, PositionVector, TileID):
-	#WORK IN PROGRESS
-	#DO SOMETHING AND DONT FORGET TO UPDATE START AND END POINT!
-	pass
+	map[PositionVector.x][PositionVector.y] = TileID
+	MapNode.set_cellv(PositionVector, TileID)
 
 #This function removes any cells after a specific margin from the map.
 func garbage_collect(MapNode, CellMargin=100):
