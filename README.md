@@ -73,19 +73,19 @@ Conveniently, this repository is also a Godot testing project. By downloading th
 
 This is what it looks like if you set `CellMargin` to `1`:
 
-![1 Margin](screenshots/margin1.png)
+![1 Margin](screenshots/gif1.gif)
 
 No real difference, right? :)
 
 This is what it looks like if you do not set any `CellMargin` (aka `0`):
 
-![0 Margin](screenshots/margin0.png)
+![0 Margin](screenshots/gif2.gif)
 
 Note that this screenshot has been taken while moving, when the camera doesn't move you don't see any difference as well.
 
 And finally, this is what it looks like if you use a negative (e.g. `-3`) `CellMargin`:
 
-![-3 Margin](screenshots/margin-3.png)
+![-3 Margin](screenshots/gif3.gif)
 
 ---
 
