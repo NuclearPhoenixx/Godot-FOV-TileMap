@@ -46,20 +46,26 @@ draw_map(MapNode, CameraNode, CellMargin=0)
 ```
 ...where `MapNode` is your Tilemap Node, `CameraNode` is your moving Camera2D Node and `CellMargin` is the margin of cells around your FOV (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
 
-You can also get the start and ending points of your map using these two functions:
-
-```python
-get_start_point()
-get_end_point()
-```
-... which both return a Vector2 with the coordinates. However, if you already loaded the map, you can simply grab the vars that the map loader has created.
+You can get the start and ending points of your map (when already loaded) using these two variables:
 
 ```python
 var start_point
 var end_point
 ```
+... which are both Vector2 with the specific coordinates.
 
-**More functions to come!**
+You can rebuild the whole map using the following function:
+```python
+rebuild_map()
+```
+... which might be useful when turning off the plugin and rebuild your normal map.
+
+To update a single tile within the map dict of this plugin you can use this command:
+
+```python
+update_cell(MapNode, PositionVector, TileID)
+```
+... where `MapNode` is the map Node for this tile, `PositionVector` is the tile position and `TileID` is the new tile texture number.
 
 ---
 
