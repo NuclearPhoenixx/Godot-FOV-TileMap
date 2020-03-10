@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-var script = preload(\"res://fov_tilemap.gd\").new() #Import the script
+var ftm = preload(\"res://fov_tilemap.gd\").new() #Import the script
 onready var Map = get_node(\"Map\") #Grab the map node once
 
 func _ready():
@@ -19,7 +19,7 @@ func _ready():
 		y = 0
 		x += 1
 	
-	script.load_map(Map) #Load the map into the script
+	ftm.load_map(Map) #Load the map into the script
 
 var FPS = [] #Array for FPS measurements
 onready var Camera = get_node(\"Camera\") #Get camera node once
@@ -34,7 +34,7 @@ func _process(delta):
 		get_tree().quit()
 	
 	FPS.append(Performance.get_monitor(Performance.TIME_FPS)) #Log FPS each frame
-	script.draw_map(Map, Camera, 1) #Update the tilemap every frame and set a margin of 1
+	ftm.draw_map(Map, Camera, 1) #Update the tilemap every frame and set a margin of 1
 "
 
 [sub_resource type="GDScript" id=2]
@@ -92,8 +92,6 @@ tile_data = PoolIntArray( 131074, 11, 0, 131077, 11, 0, 131079, 11, 0, 131082, 1
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 limit_smoothed = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_enabled = true
 smoothing_speed = 15.0
 script = SubResource( 2 )
