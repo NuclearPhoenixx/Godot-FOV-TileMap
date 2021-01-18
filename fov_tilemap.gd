@@ -79,8 +79,6 @@ func update_cell(MapNode: TileMap, PositionVector: Vector2, TileID: int):
 func get_x_cell_values():
 	for x in map.keys():
 		x_cell_values.append(int(x)) # Append all the X values to the array.
-	
-	return
 
 
 # This function gets all the Y values for each cell from the tilemap.
@@ -93,8 +91,6 @@ func get_y_cell_values():
 	for x in x_values:
 		for y in map[x].keys():
 			y_cell_values.append(int(y)) # Append all the Y values to the array.
-	
-	return
 
 
 # This function re-builds the whole tilemap from the map dict.
