@@ -20,7 +20,7 @@ So if you want to use this in your own game be aware, or just rewrite it in GDNa
 
 The map dictionary is constructed like this:
 
-```python
+```gdscript
 Dictionary map = {
     int x0 : { int y0 : int TileID, int y1 : int TileID, ... },
     int x1 : { int y0 : int TileID, int y1 : int TileID, ... },
@@ -38,28 +38,28 @@ The only file you will need to get started is this one: [fov_tilemap.gd](fov_til
 Before you can actually use this, you have to have a TileMap and a Camera2D.
 After you set the TileMap and Camera2D to your needs, import the script and run the following command to load the map for it:
 
-```python
+```gdscript
 load_map(MapNode: TileMap)
 ```
 ... where `MapNode` is your TileMap Node.
 
 Then you can call the following whenever you want to update the map (preferably whenever the Camera2D has moved or e.g. in `_process()`).
 
-```python
+```gdscript
 draw_map(MapNode: TileMap, CameraNode: Camera2D, CellMargin: int=0)
 ```
 ...where `MapNode` is your Tilemap Node, `CameraNode` is your moving Camera2D Node and `CellMargin` is the margin of cells around your FOV
 (e.g. 1 is one more cell and -1 is one cell less on each side of the Camera FOV; default: 0)
 
 You can rebuild the whole map using the following function:
-```python
+```gdscript
 rebuild_map(MapNode: TileMap)
 ```
 ... which might be useful when turning off the plugin and rebuild your normal map.
 
 To update a single tile within the map dict of this plugin you can use this command:
 
-```python
+```gdscript
 update_cell(MapNode: TileMap, PositionVector: Vector2, TileID: int)
 ```
 ... where `MapNode` is the TileMap Node for the tile, `PositionVector` is the tile position and `TileID` is the new tile texture number.
