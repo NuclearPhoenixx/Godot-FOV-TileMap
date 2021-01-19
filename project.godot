@@ -22,6 +22,10 @@ run/main_scene="res://main.tscn"
 
 gdscript/warnings/unused_argument=false
 
+[display]
+
+window/vsync/use_vsync=false
+
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
