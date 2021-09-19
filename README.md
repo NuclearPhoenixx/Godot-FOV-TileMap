@@ -69,7 +69,13 @@ update_cell(MapNode: TileMap, PositionVector: Vector2, TileID: int)
 ## Example
 
 Conveniently, this repository is also a Godot testing project. By downloading this repo and importing it in Godot 3.0+ you can instantly see
-and learn how this could be used and how the script works.
+and learn how this could be used and how the script works. Default FOV `CellMargin` is set to 1.
+
+## Live Demo
+
+Even more conveniently, Github Pages lets me host a HTML5 export of the example "game".
+
+You can find it <HERE LINK>.
 
 ---
 
