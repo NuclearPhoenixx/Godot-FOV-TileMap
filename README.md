@@ -5,11 +5,9 @@ Simple Godot 3.0+ script that allows TileMap manipulation depending on a Camera2
 It works by only setting map cells that are visible to the Camera2D node that you handed over to the functions. It's a side-project of mine and just a nice little experiment.
 Note that Godot itself takes care of the TileMap rendering, but with much better performance (see "clipping"; also this script is "only" GDScript, not the faster C++ GDNative).
 
-This allows you to, for example, easily work with a procedural map generator. You can add your generated cells to the map dictionary,
-so that you only have to generate around the Camera2D FOV, but with a buffer of an arbitrary number of cells.
-**Note:** Currently there is no *garbage collection* so if you add a cell to the map dictionary it will stay there forever
-using more and more RAM when moving through your world.
-If you plan on using it this way, you should implement a func that manipulates the map dictionary directly to delete old tiles.
+This allows you to, for example, easily work with a **procedural map generator**. You can add your generated cells to the map dictionary, so that you only have to generate around the Camera2D's FOV, but with a buffer of an arbitrary number of cells so that players won't notice. If you combine this with Godot's `RandomNumberGenerator` class, you can generate tiles using a location-dependent seed and add them to the map when needed. This way you can delete them after some time to free up memory and when needed re-generate the tiles using the same location-dependent seed.
+
+**Note:** Currently there is no *garbage collection* so if you add a cell to the map dictionary it will stay there forever. And when you add cells without deleting them they will be using more and more RAM when moving through your world, generating more and more of them. If you plan on using it this way, you should implement a function that manipulates the map dictionary directly to delete old tiles.
 
 You could also use this to have a very crude visual range effect if you set the `CellMargin` to a negative value,
 which makes the visible TileMap smaller than the Camera2D FOV. More below at "Media".
