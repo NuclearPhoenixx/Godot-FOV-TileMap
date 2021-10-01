@@ -1,14 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-var ftm := preload(\"res://fov_tilemap.gd\").new() # Import the script
 var FPS := [] # Array for FPS measurements
 
-onready var Map := $Map # Grab the map node once
+onready var Map := $TileMap # Grab the map node once
 onready var Camera := $Camera # Get camera node once
 
 func _ready():
@@ -23,8 +22,7 @@ func _ready():
 		x += 1
 	
 	Map.set_cell(2,3,-1)
-	
-	ftm.load_map(Map) # Load the map into the script
+	Map.load_map() # Load map manually again, because we just generated it. 
 
 
 func _process(delta):
@@ -37,8 +35,6 @@ func _process(delta):
 		get_tree().quit()
 	
 	FPS.append(Performance.get_monitor(Performance.TIME_FPS)) # Log FPS each frame
-	
-	ftm.draw_map(Map, Camera, 1) # Update the tilemap every frame and set a margin of 1
 "
 
 [sub_resource type="GDScript" id=2]
@@ -84,16 +80,39 @@ func _process(delta): #Take care of camera movement
 			get_tree().set_input_as_handled()
 "
 
+[sub_resource type="GDScript" id=3]
+script/source = "## Important:
+## You need to extend from FovTileMap:
+extends FovTileMap
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
 [node name="Main" type="Node2D"]
 script = SubResource( 1 )
-
-[node name="Map" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 20, 20 )
-format = 1
-tile_data = PoolIntArray( 131074, 11, 0, 131077, 11, 0, 131079, 11, 0, 131082, 11, 0, 196610, 11, 0, 196613, 11, 0, 196615, 11, 0, 196618, 11, 0, 262146, 11, 0, 262147, 11, 0, 262148, 11, 0, 262149, 11, 0, 262151, 11, 0, 262154, 11, 0, 327682, 11, 0, 327685, 11, 0, 327687, 11, 0, 393218, 11, 0, 393221, 11, 0, 393223, 11, 0, 393226, 11, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 limit_smoothed = true
 script = SubResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 20, 20 )
+format = 1
+tile_data = PoolIntArray( 327686, 11, 0, 327687, 11, 0, 327688, 11, 0, 327689, 11, 0, 327690, 11, 0, 327691, 11, 0, 327692, 11, 0, 327694, 11, 0, 327695, 11, 0, 327696, 11, 0, 327697, 11, 0, 327698, 11, 0, 327700, 11, 0, 327701, 11, 0, 327702, 11, 0, 327703, 11, 0, 327704, 11, 0, 327706, 11, 0, 327707, 11, 0, 327708, 11, 0, 327709, 11, 0, 327710, 11, 0, 327711, 11, 0, 327712, 11, 0, 393225, 11, 0, 393230, 11, 0, 393236, 11, 0, 393245, 11, 0, 458761, 11, 0, 458766, 11, 0, 458772, 11, 0, 458781, 11, 0, 524297, 11, 0, 524302, 11, 0, 524303, 11, 0, 524304, 11, 0, 524305, 11, 0, 524308, 11, 0, 524309, 11, 0, 524310, 11, 0, 524311, 11, 0, 524312, 11, 0, 524317, 11, 0, 589833, 11, 0, 589838, 11, 0, 589848, 11, 0, 589853, 11, 0, 655369, 11, 0, 655374, 11, 0, 655384, 11, 0, 655389, 11, 0, 720905, 11, 0, 720910, 11, 0, 720920, 11, 0, 720925, 11, 0, 786441, 11, 0, 786446, 11, 0, 786447, 11, 0, 786448, 11, 0, 786449, 11, 0, 786450, 11, 0, 786452, 11, 0, 786453, 11, 0, 786454, 11, 0, 786455, 11, 0, 786456, 11, 0, 786461, 11, 0 )
+script = SubResource( 3 )
+CameraNode = NodePath("../Camera")

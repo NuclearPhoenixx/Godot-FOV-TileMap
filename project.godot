@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "TileMap",
+"class": "FovTileMap",
+"language": "GDScript",
+"path": "res://fov_tilemap.gd"
+} ]
 _global_script_class_icons={
+"FovTileMap": ""
 }
 
 [application]
