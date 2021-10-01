@@ -1,4 +1,5 @@
 # Godot-FOV-TileMap
+![latest version](https://img.shields.io/github/release/Phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge) ![issues](https://img.shields.io/github/issues/Phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge) ![open pr](https://img.shields.io/github/issues-pr-raw/phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge)
 
 Simple Godot 3.0+ class that allows TileMap manipulation depending on a Camera2D's FOV. It loads and unloads all cells depending on Camera2D position and settings.
 
