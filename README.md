@@ -34,7 +34,7 @@ This will give you a clean, new script to begin with and all the FOV-TileMap fun
 
 ### Editor Settings
 
-The are all the export variables that will be visible in the TileMap's settings tab:
+These are all the export variables that will be visible in the TileMap's settings tab:
 
 ```gdscript
 export(NodePath) onready var CameraNode = get_node(CameraNode)
