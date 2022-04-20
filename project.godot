@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="FOV Tilemaps"
+config/name="Godot FOV Tilemaps"
 run/main_scene="res://main.tscn"
 
 [debug]
