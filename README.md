@@ -1,5 +1,5 @@
 # Godot-FOV-TileMap
-![latest version](https://img.shields.io/github/release/Phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge) ![issues](https://img.shields.io/github/issues/Phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge) ![open pr](https://img.shields.io/github/issues-pr-raw/phoenix1747/Godot-FOV-TileMap.svg?style=for-the-badge)
+![latest version](https://img.shields.io/github/release/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge) ![issues](https://img.shields.io/github/issues/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge) ![open pr](https://img.shields.io/github/issues-pr-raw/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge)
 
 Simple Godot 3.0+ class that allows TileMap manipulation depending on a Camera2D's FOV. It loads and unloads all cells depending on Camera2D position and settings.
 
@@ -18,7 +18,7 @@ So if you want to use this in your own game please be aware of that, or just rew
 **The only file you will need to get started is this one: [fov_tilemap.gd](fov_tilemap.gd)
 It includes the latest `FovTileMap` class for use.**
 
-You can also still use the old script which needs to be loaded and called manually to work: [fov_tilemap_script.gd](https://github.com/Phoenix1747/Godot-FOV-TileMap/blob/v1.0.0/fov_tilemap.gd)
+You can also still use the old script which needs to be loaded and called manually to work: [fov_tilemap_script.gd](https://github.com/NuclearPhoenixx/Godot-FOV-TileMap/blob/v1.0.0/fov_tilemap.gd)
 (Not Recommended)
 
 ## Usage
@@ -104,7 +104,7 @@ Note, however, that updating the map too often will likely result in a hefty per
 Conveniently, this repository is also a Godot testing project. By downloading this repo and importing it in Godot 3.0+ you can instantly see
 and learn how this could be used and how the script works. Default FOV `CellMargin` is set to 0.
 
-A live web (HTML5) demo can be found [here](https://phoenix1747.github.io/Godot-FOV-TileMap/).
+A live web (HTML5) demo can be found [here](https://NuclearPhoenixx.github.io/Godot-FOV-TileMap/).
 
 **Please note, however, that the performance of the web version is much worse than any native export.**
 

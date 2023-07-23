@@ -1,6 +1,6 @@
 ##
-## FOV Tilemap by Phoenix1747.
-## https://github.com/Phoenix1747/Godot-FOV-Tilemaps
+## FOV Tilemap by NuclearPhoenix.
+## https://github.com/NuclearPhoenixx/Godot-FOV-Tilemaps
 ##
 extends TileMap
 
