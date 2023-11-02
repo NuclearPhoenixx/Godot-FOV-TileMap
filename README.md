@@ -1,7 +1,7 @@
 # Godot-FOV-TileMap
 ![latest version](https://img.shields.io/github/release/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge) ![issues](https://img.shields.io/github/issues/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge) ![open pr](https://img.shields.io/github/issues-pr-raw/NuclearPhoenixx/Godot-FOV-TileMap.svg?style=for-the-badge)
 
-Simple Godot 3.0+ class that allows TileMap manipulation depending on a Camera2D's FOV. It loads and unloads all cells depending on Camera2D position and settings.
+Simple **Godot 3.x** class that allows TileMap manipulation depending on a Camera2D's FOV. It loads and unloads all cells depending on Camera2D position and settings.
 
 It works by only setting map cells that are visible to the Camera2D node, which you can select in the TileMap's settings tab. Note that Godot itself takes care of the TileMap rendering, but with much better performance (see [comparison](#comparison), and also this script is "only" GDScript, not the faster C++ GDNative).
 
